@@ -1,0 +1,71 @@
+.example-tree-invisible {
+    display: none;
+  }
+  
+  .example-tree ul,
+  .example-tree li {
+    margin-top: 0;
+    margin-bottom: 0;
+    list-style-type: none;
+  }
+  
+  /*
+   * This padding sets alignment of the nested nodes.
+   */
+  .example-tree .mat-nested-tree-node div[role=group] {
+    padding-left: 40px;
+  }
+  
+  /*
+   * Padding for leaf nodes.
+   * Leaf nodes need to have padding so as to align with other non-leaf nodes
+   * under the same parent.
+   */
+  .example-tree div[role=group] > .mat-tree-node {
+    padding-left: 40px;
+  }
+
+  .example-tree {
+    background-color: #e0e0e0; /* Arka planı beyaz yapar */
+    color: black; /* Yazıları siyah yapar */
+  }
+  
+  .example-tree .mat-tree-node {
+    color: black; /* Ağaç düğümlerinin yazı rengini siyah yapar */
+  }
+  
+  .example-tree .mat-nested-tree-node div[role=group] {
+    padding-left: 40px;
+  }
+  
+  .example-tree div[role=group] > .mat-tree-node {
+    padding-left: 40px;
+  }
+  
+  .mat-icon {
+    color: black; /* Mat ikonu siyah yapar */
+  }
+/* Mat-tree arka plan rengini değiştirme */
+.example-tree {
+    background-color: #e0f7fa; /* Örneğin açık mavi arka plan rengi */
+  }
+  
+  /* Mat-tree-node arka plan rengini değiştirme */
+  .example-tree .mat-tree-node {
+    background-color: #e0f7fa; /* Aynı arka plan rengini kullanarak görünüm sağlar */
+  }
+  
+  /* İkon ve butonların arka plan rengini değiştirme */
+  .example-tree .mat-icon {
+    color: #00796b; /* İkon rengini değiştirme (örneğin yeşil) */
+  }
+  
+  .example-tree .mat-button {
+    background-color: #00796b; /* Buton arka plan rengini değiştirme (örneğin yeşil) */
+    color: white; /* Buton yazı rengini beyaz yapma */
+  }
+  
+  .example-tree .mat-button:hover {
+    background-color: #004d40; /* Hover durumunda butonun arka plan rengini değiştirme */
+  }
+  

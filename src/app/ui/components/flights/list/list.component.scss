@@ -1,0 +1,8 @@
+.extra-large-modal .modal-dialog {
+  max-width: 95%; /* Genişliği %95'e kadar büyütün */
+  max-height: 95vh; /* Yüksekliği %95 viewport height'e ayarlayın */
+}
+
+.extra-large-modal .modal-content {
+  height: auto; /* İçeriğin boyutuna göre ayarlanmasını sağlar */
+}

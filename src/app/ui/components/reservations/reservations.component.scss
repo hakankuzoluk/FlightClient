@@ -1,0 +1,27 @@
+.modal-dialog {
+    max-width: 800px;
+    width: 100%;
+}
+
+.modal-content {
+    height: auto;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+.form-control {
+    font-size: 1.2rem;
+    padding: 10px;
+}
+
+.btn {
+    font-size: 1.2rem;
+    padding: 10px 20px;
+}
+.custom-modal .modal-dialog {
+    max-width: 80%; /* Modal genişliği */
+    width: 80%;
+  }
+  
+  .custom-modal .modal-content {
+    height: 80vh; /* Modal yüksekliği */
+  }

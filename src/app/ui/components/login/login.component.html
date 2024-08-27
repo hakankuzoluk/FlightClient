@@ -1,0 +1,16 @@
+<div class="form-container">
+    <div class="form-content">
+      <div class="mb-3">
+        <label for="userName" class="form-label">Kullanıcı Adı</label>
+        <input #txtUsernameOrEmail type="text" formControlName="userName" class="form-control" id="userName" placeholder="Kullanıcı Adı & Email">
+        <small class="form-text text-muted invalid-feedback" id="userName">***</small>
+      </div>
+      <div class="mb-3">
+        <label for="pass" class="form-label">Şifre</label>
+        <input #txtPassword type="password" formControlName="pass" class="form-control" id="pass" placeholder="Şifre">
+      </div>
+      <asl-google-signin-button></asl-google-signin-button>
+      <br>
+      <button type="submit" class="btn btn-primary" (click)="login(txtUsernameOrEmail.value, txtPassword.value)">Giriş Yap</button>
+    </div>
+  </div>

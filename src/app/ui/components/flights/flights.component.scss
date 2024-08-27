@@ -1,0 +1,18 @@
+.list-group {
+    height: 1500px;
+    width: 1500px;
+}
+.mat-tab-group {
+    margin-bottom: 48px;
+  }
+
+  .mat-tab-label {
+    font-size: 1.25rem; /* Yazı boyutunu artır */
+    color: #333; /* Yazı rengini koyulaştır */
+    font-weight: bold; /* Yazıyı kalın yap */
+  }
+  
+  .mat-tab-label.mat-tab-label-active {
+    color: #000; /* Aktif sekme için farklı bir renk (isteğe bağlı) */
+  }
+

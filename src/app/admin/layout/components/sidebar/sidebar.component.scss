@@ -1,0 +1,37 @@
+mat-list {
+    background-color: #bbb0b0; // Arka plan rengini belirleyin
+    border-radius: 8px; // Köşeleri yuvarlak yapın
+    padding: 16px; // İç boşluk
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); // Hafif gölge
+    max-width: 400px; // Maksimum genişlik
+    margin: 0 auto; // Ortalamak için otomatik kenar boşluğu
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  mat-list-item {
+    border-radius: 4px; // Köşeleri yuvarlak yapın
+    padding: 12px; // İç boşluk
+    margin-bottom: 8px; // Alt boşluk
+    background-color: #ffffff; // Arka plan rengi
+    transition: background-color 0.3s, box-shadow 0.3s; // Geçiş efekti
+    width: 100%; // Öğeyi tam genişlikte yapar
+  
+    &:hover {
+      background-color: #e0e0e0; // Üzerine gelindiğinde arka plan rengini değiştirin
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); // Üzerine gelindiğinde gölgeyi artırın
+    }
+  }
+  
+  a {
+    color: #333; // Yazı rengi
+    text-decoration: none; // Alt çizgi kaldırma
+    font-weight: 500; // Font kalınlığı
+    display: block; // Bağlantıyı tam genişlikte yapar
+  
+    &:hover {
+      color: #1976d2; // Üzerine gelindiğinde yazı rengini değiştirin
+    }
+  }
+  

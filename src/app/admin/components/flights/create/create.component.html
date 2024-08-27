@@ -1,0 +1,34 @@
+<br>
+<div class="input"> 
+   <mat-form-field>
+        <mat-label>Nereden</mat-label>
+        <input matInput #txtDeparture>
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Nereye</mat-label>
+        <input matInput #txtDestination>
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Tarih Seçin :</mat-label>
+        <input matInput [matDatepicker]="picker" #txtDate>
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Kapasite</mat-label>
+        <input matInput type="number" min="0" max="40" value="0" #txtCapacity>
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Bilet Fiyatı</mat-label>
+        <input matInput type="number" min="0" value="0" #txtPrice>
+    </mat-form-field>
+
+    <button  type="button" class="btn btn-primary" (click)="create(txtDeparture,txtDestination,txtDate,txtCapacity,txtPrice)">Uçak Seferi Ekle</button>
+
+</div>  
+
+      

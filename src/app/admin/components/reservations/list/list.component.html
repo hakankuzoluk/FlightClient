@@ -1,0 +1,46 @@
+<!-- <div class="reservations-list">
+    <h2>Rezervasyonlar</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Kullanıcı Adı</th>
+          <th>Uçuş Bilgisi</th>
+          <th>Rezervasyon Zamanı</th>
+          <th>Kişi Sayısı</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let reservation of reservations">
+          <td>{{ reservation.userName }}</td>
+          <td>{{ reservation.departure }}</td>
+          <td>{{ reservation.destination }}</td>
+          <td>{{ reservation.reservationTime | date: 'short' }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div> -->
+  <!-- On tables -->
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">İsim</th>
+        <th scope="col">Kullanıcı Adı</th>
+        <th scope="col">Nerden</th>
+        <th scope="col">Nereye</th>
+        <th scope="col">Tarih</th>
+        <th scope="col">İşlem</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr  *ngFor="let reservation of reservations; let i = index;">
+        <th scope="row">{{i + 1}}</th>
+        <td>{{ reservation.name }}</td>
+        <td>{{ reservation.userName }}</td>
+        <td>{{ reservation.departure }}</td>
+        <td>{{ reservation.destination }}</td>
+        <td>{{ reservation.reservationTime }}</td>
+        <td> <button type="button" class="btn btn-danger" (click)="removeReservation(reservation.reservationId)">X</button></td>
+      </tr> 
+    </tbody>
+  </table>

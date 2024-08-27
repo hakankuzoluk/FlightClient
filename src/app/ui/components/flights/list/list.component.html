@@ -1,0 +1,163 @@
+<br><br>
+<form (submit)="filterFlights()" class="p-4 rounded shadow bg-light">
+  <div class="row justify-content-center">
+    <div class="col-md-3 mb-3">
+      <div class="form-floating">
+        <input type="text" id="departure" class="form-control" [(ngModel)]="filters.departure" name="departure" placeholder="Nereden">
+        <label for="departure">Nereden</label>
+      </div>
+    </div>
+    <div class="col-md-3 mb-3">
+      <div class="form-floating">
+        <input type="text" id="destination" class="form-control" [(ngModel)]="filters.destination" name="destination" placeholder="Nereye">
+        <label for="destination">Nereye</label>
+      </div>
+    </div>
+    <div class="col-md-3 mb-3">
+      <div class="form-floating">
+        <input type="date" id="date" class="form-control" [(ngModel)]="filters.date" name="date">
+        <label for="date">Tarih</label>
+      </div>
+    </div>
+    <div class="col-md-3 mb-3">
+      <button type="submit" class="btn btn-primary w-100 btn-lg">Sefer Bul</button>
+    </div>
+  </div>
+</form>
+<div class="card text-center" style="margin: 25px;" *ngFor="let flight of filteredFlights; let i = index;">
+    <div class="card-header" style="font-size: 1.25rem;">
+      {{flight.departure}} - {{flight.destination}}
+    </div>
+    <div class="card-body" style="position: relative; 
+         background-image: url('/ucak.png'), url('/ucak.png'); 
+         background-repeat: no-repeat, no-repeat; 
+         background-position: calc(50% + 400px) center, calc(50% - 400px) center; 
+         background-clip: content-box;">
+      <h5 class="card-title" style="font-size: 1.5rem;">Uçuş Bilgileri</h5>
+      <div class="d-flex justify-content-center align-items-center mb-3">
+        <div style="font-size: 1.000rem;">
+          <strong>Nerden:</strong> {{flight.departure}}
+        </div>
+        <div style="margin: 0 10px;">
+          <img src="/t3.png" alt="Arrow" style="width: 50px; height: 50px;">
+        </div>
+        <div style="font-size: 1.000rem;">
+          <strong>Nereye:</strong> {{flight.destination}}
+        </div>
+      </div>
+      <p class="card-text" style="font-size: 1.000rem;"><strong>Tarih:</strong> {{flight.date}}</p>
+    </div>
+    <div class="card-footer text-body-secondary" style="font-size: 0.875rem;">
+        <a class="btn btn-primary" style="font-size: 1.000rem;" data-bs-toggle="modal" data-bs-target="#staticBackdrop" (click)="openModal(flight)">Uçuş Seç</a>
+      <!-- <div class="collapse" [id]="'collapseExample' + i">
+          <div class="card card-body">
+            <mat-tab-group  mat-stretch-tabs="true" mat-align-tabs="center">
+               <mat-tab  label="Bilet Bilgileri">
+                <div class="card text-center" style="margin: 25px; border-radius: 15px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);" >
+                  <div class="card-header" style="font-size: 1.25rem; background-color: #007bff; color: white; border-radius: 15px 15px 0 0;">
+                      Bilet Rezervasyonu
+                  </div>
+                  <div class="card-body" style="position: relative; 
+                       background-image: url('/bilet.png'), url('/arreival_16121602.gif'); 
+                       background-repeat: no-repeat, no-repeat; 
+                       background-position:  center,  center; 
+                       background-clip: content-box;">
+                      <div class="d-flex justify-content-between align-items-start mb-3">
+                          <div style="flex: 1; text-align: center;">
+                              <h5 class="card-title" style="font-size: 1.5rem;">Uçuş Bilgileri</h5>
+                              <div style="font-size: 1.000rem; margin-bottom: 10px;">
+                                  <strong>Nerden:</strong> <span>{{flight.departure}}</span>
+                              </div>
+                              <div style="font-size: 1.000rem; margin-bottom: 10px;">
+                                  <strong>Nereye:</strong> <span>{{flight.destination}}</span>
+                              </div>
+                              <div style="font-size: 1.000rem;">
+                                  <strong>Tarih:</strong> <span>{{flight.date}}</span>
+                              </div>
+                          </div>
+                          <div style="flex: 1; text-align: center;">
+                              <h5 class="card-title" style="font-size: 1.5rem;">Bilet Bilgileri</h5>
+                              <div style="font-size: 1.000rem; margin-bottom: 10px;">
+                                  <strong>Bilet Sayısı:</strong>
+                                  <input type="number" [value]="flight.quantity" style="width: 60px;" />
+                              </div>
+                              <div style="font-size: 1.000rem; margin-bottom: 20px;">
+                                  <strong>Bilet Fiyatı:</strong> <span>{{flight.price}} TL</span>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              </mat-tab> -->
+              <!-- <mat-tab label="Ödeme İşlemleri">
+                <div class="card text-center" style="margin: 25px; border-radius: 15px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);" >
+                  <div class="card-header" style="font-size: 1.25rem; background-color: #007bff; color: white; border-radius: 15px 15px 0 0;">
+                      Ödeme İşlemi
+                  </div>
+                  <div class="card-body" style="position: relative; 
+                       background-image: url('/arrows.png'), url('/arreival_16121602.gif'); 
+                       background-repeat: no-repeat, no-repeat; 
+                       background-position:  center,  center; 
+                       background-clip: content-box;">
+                      <div class="d-flex justify-content-between align-items-start mb-3">
+                          <div style="flex: 1; text-align: center;">
+                              <h5 class="card-title" style="font-size: 1.5rem;">Uçuş Bilgileri</h5>
+                              <form>
+                                <div class="mb-3">
+                                  <label for="cardNumber" class="form-label">Kart Numarası</label>
+                                  <input type="text" style="width: 600px; " class="form-control" id="cardNumber" placeholder="XXXX-XXXX-XXXX-XXXX">
+                                </div>
+                                <div class="mb-3">
+                                  <label for="cardExpiration" class="form-label">Son Kullanma Tarihi</label>
+                                  <input type="text" style="width: 600px; " class="form-control" id="cardExpiration" placeholder="MM/YY">
+                                </div>
+                                <div class="mb-3">
+                                  <label for="cardCVC" class="form-label">CVC</label>
+                                  <input type="text" style="width: 600px; " class="form-control" id="cardCVC" placeholder="XXX">
+                                </div>
+                              </form>
+                          </div>
+                          <div style="flex: 1; text-align: center;">
+                              <h5 class="card-title" style="font-size: 1.5rem;">Bilet Bilgileri</h5>
+                              <br>
+                              <br>
+                              <div style="font-size: 1.000rem; margin-bottom: 20px;">
+                                  <strong>Ödenecek Tutar :</strong> <span>{{flight.price}} TL</span>
+                              </div>
+                              <br>
+                              <a class="btn btn-primary" style="font-size: 1.000rem; "  (click)="addToReservation(flight)">Bileti Al</a>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              </mat-tab> -->
+            <!-- </mat-tab-group>
+          </div>  -->
+      <!-- </div> -->
+  </div>
+</div>
+
+<nav aria-label="Page navigation example">
+  <ul class="pagination justify-content-center">
+    <li class="page-item">
+      <a class="page-link">
+        {{currentPageNo}}/{{totalPageCount}}
+      </a>
+    </li>
+    <li class="page-item">
+      <a class="page-link" [routerLink]="['/flights', currentPageNo - 1 <= 0 ? 1 : currentPageNo - 1]">Önceki</a>
+    </li>
+
+    <li class="page-item" *ngFor="let pageNo of pageList;" routerLinkActive="active">
+      <a class="page-link" [routerLink]="['/flights', pageNo]">{{pageNo}}</a>
+    </li>
+
+    <li class="page-item">
+      <a class="page-link" [routerLink]="['/flights', currentPageNo + 1 >= totalPageCount ? totalPageCount : currentPageNo + 1]" >Sonraki</a>
+    </li>
+  </ul>
+</nav>
+<!-- 
+ <app-reservations [resUser] ="" ></app-reservations> -->
+
+

@@ -1,0 +1,100 @@
+<!-- <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">   
+           
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">İptal</button>
+          <button type="button" class="btn btn-success"  >Bileti Al</button>
+        </div>
+      </div>
+    </div>
+  </div> -->
+  <div class="modal-body">
+    <mat-tab-group  mat-stretch-tabs="true" mat-align-tabs="center">
+      <mat-tab  label="Bilet Bilgileri">
+        <div class="card text-center" style="margin: 25px; border-radius: 15px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);" >
+          <div class="card-header" style="font-size: 1.25rem; background-color: #007bff; color: white; border-radius: 15px 15px 0 0;">
+              Bilet Rezervasyonu
+          </div>
+          <div class="card-body" style="position: relative; 
+               background-image: url('/bilet.png'), url('/arreival_16121602.gif'); 
+               background-repeat: no-repeat, no-repeat; 
+               background-position:  center,  center; 
+               background-clip: content-box;">
+              <div class="d-flex justify-content-between align-items-start mb-3">
+                  <div style="flex: 1; text-align: center;">
+                      <h5 class="card-title" style="font-size: 1.5rem;">Uçuş Bilgileri</h5>
+                      <div style="font-size: 1.000rem; margin-bottom: 10px;">
+                          <strong>Nerden:</strong> <span>{{flight.departure}}</span>
+                      </div>
+                      <div style="font-size: 1.000rem; margin-bottom: 10px;">
+                          <strong>Nereye:</strong> <span>{{flight.destination}}</span>
+                      </div>
+                      <div style="font-size: 1.000rem;">
+                          <strong>Tarih:</strong> <span>{{flight.date}}</span>
+                      </div>
+                  </div>
+                  <div style="flex: 1; text-align: center;">
+                      <h5 class="card-title" style="font-size: 1.5rem;">Bilet Bilgileri</h5>
+                      <div style="font-size: 1.000rem; margin-bottom: 10px;">
+                          <strong>Bilet Sayısı:</strong>
+                          <input type="number" [value]="1" style="width: 60px;" />
+                      </div>
+                      <div style="font-size: 1.000rem; margin-bottom: 20px;">
+                          <strong>Bilet Fiyatı:</strong> <span>{{flight.price}} TL</span>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+      </mat-tab>
+      <mat-tab label="Ödeme İşlemleri">
+        <div class="card text-center" style="margin: 25px; border-radius: 15px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);" >
+          <div class="card-header" style="font-size: 1.25rem; background-color: #007bff; color: white; border-radius: 15px 15px 0 0;">
+              Ödeme İşlemi
+          </div>
+          <div class="card-body" style="position: relative; 
+               background-image: url('/bilet.png'), url('/bilet.png'); 
+               background-repeat: no-repeat, no-repeat; 
+               background-position:  center,  center; 
+               background-clip: content-box;">
+              <div class="d-flex justify-content-between align-items-start mb-3">
+                  <div style="flex: 1; text-align: center;">
+                      <h5 class="card-title" style="font-size: 1.5rem;">Uçuş Bilgileri</h5>
+                      <form>
+                        <div class="mb-3">
+                          <label for="cardNumber" class="form-label">Kart Numarası</label>
+                          <input type="text" style="width: 400px; " class="form-control" id="cardNumber" placeholder="XXXX-XXXX-XXXX-XXXX">
+                        </div>
+                        <div class="mb-3">
+                          <label for="cardExpiration" class="form-label">Son Kullanma Tarihi</label>
+                          <input type="text" style="width: 400px; " class="form-control" id="cardExpiration" placeholder="MM/YY">
+                        </div>
+                        <div class="mb-3">
+                          <label for="cardCVC" class="form-label">CVC</label>
+                          <input type="text" style="width: 400px; " class="form-control" id="cardCVC" placeholder="XXX">
+                        </div>
+                      </form>
+                  </div>
+                  <div style="flex: 1; text-align: center;">
+                      <h5 class="card-title" style="font-size: 1.5rem;">Bilet Bilgileri</h5>
+                      <br>
+                      <br>
+                      <div style="font-size: 1.000rem; margin-bottom: 20px;">
+                          <strong>Ödenecek Tutar :</strong> <span>{{flight.price}} TL</span>
+                      </div>
+                      <br>
+                      <a class="btn btn-primary" style="font-size: 1.000rem; "  (click)="addToReservation(flight)">Bileti Al</a>
+                  </div>
+              </div>
+          </div>
+      </div>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
