@@ -4,6 +4,7 @@ import { CustomToastrService, ToastrMessageType, ToastrPosition } from '../../ui
 import { IUserInfo, LoginResponse, TokenResponse } from '../../../contracts/token/tokenResponse';
 import { firstValueFrom, Observable } from 'rxjs';
 import { SocialUser } from '@abacritt/angularx-social-login';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,7 @@ export class UserAuthService {
     return !!info ? JSON.parse(info) as IUserInfo : null;
   }
 
-  constructor(private httpClientService : HttpClientService, private toastrService : CustomToastrService) { }
+  constructor(private httpClientService : HttpClientService, private toastrService : CustomToastrService, private router : Router) { }
   
   async login(usernameOrEmail : string, password : string, callBackFunction? : () => void) : Promise<any> {
     const observable: Observable<any | LoginResponse> = this.httpClientService.post<any | LoginResponse>({
@@ -63,6 +64,7 @@ export class UserAuthService {
       messageType: ToastrMessageType.Success,
       position : ToastrPosition.TopRight
     })
+    this.router.navigate([""])
     
 
     callBackFunction();

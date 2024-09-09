@@ -28,7 +28,7 @@
                     <a class="nav-link active" aria-current="page" style="color:rgb(255, 21, 0);cursor: pointer;" (click)="signOut()" *ngIf="authService.isAuthenticated">Çıkış Yap</a>
                   </li>
                   <li class="nav-item">
-                    <a class="btn btn-success" type="submit"routerLink="/admin" *ngIf="authService.isAuthenticated">Yönetici Paneli</a>
+                    <a class="btn btn-success" type="submit"routerLink="/admin" *ngIf="authService.isAuthenticated &&   (hasRole$ | async)">Yönetici Paneli</a>
                   </li>
                   <!-- <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">

@@ -34,7 +34,7 @@
                                     <strong>Nereye:</strong> <span>{{reservation.destination}}</span>
                                 </div>
                                 <div style="font-size: 1.000rem;">
-                                    <strong>Tarih:</strong> <span>{{reservation.date}}</span>
+                                    <strong>Tarih: </strong>{{ reservation.date | date:'yyyy-MM-dd' }}  <strong>Saat: </strong> {{ reservation.date | date:'HH:mm' }}
                                 </div>
                             </div>
                             <div style="flex: 1; text-align: center;">

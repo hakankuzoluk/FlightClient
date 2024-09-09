@@ -21,7 +21,7 @@ const routes: Routes = [
   { path: 'flights/:pageNo', loadChildren: () => import('./ui/components/flights/flights.module').then(module => module.FlightsModule) },
   { path: 'register', loadChildren: () => import('./ui/components/register/register.module').then(module => module.RegisterModule) },
   { path: 'login', loadChildren: () => import('./ui/components/login/login.module').then(module => module.LoginModule) },
-  { path: 'reservation-list', loadChildren: () => import('./ui/components/reservation-list/reservation-list.module').then(module => module.ReservationListModule) }
+  { path: 'reservation-list', loadChildren: () => import('./ui/components/reservation-list/reservation-list.module').then(module => module.ReservationListModule), canActivate : [AuthGuard] }
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

@@ -21,6 +21,7 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { HttpErrorHandlerInterceptorService } from './services/common/http-error-handler-interceptor.service';
 import { MatTabsModule } from '@angular/material/tabs';
 import { AuthorizeMenuDialogComponent } from './dialogs/authorize-menu-dialog/authorize-menu-dialog.component';
+import { DialogsModule } from './dialogs/dialogs.module';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import { AuthorizeMenuDialogComponent } from './dialogs/authorize-menu-dialog/au
     SocialLoginModule,
     GoogleSigninButtonModule,
     MatTabsModule,
+    DialogsModule
     
   ],
   providers: [

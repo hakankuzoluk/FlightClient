@@ -3,13 +3,19 @@
   <div class="row justify-content-center">
     <div class="col-md-3 mb-3">
       <div class="form-floating">
-        <input type="text" id="departure" class="form-control" [(ngModel)]="filters.departure" name="departure" placeholder="Nereden">
+        <select id="departure" class="form-select" [(ngModel)]="filters.departure" name="departure">
+          <option value="">Nereden Seçin</option>
+          <option *ngFor="let city of cities" [value]="city">{{city}}</option>
+        </select>
         <label for="departure">Nereden</label>
       </div>
     </div>
     <div class="col-md-3 mb-3">
       <div class="form-floating">
-        <input type="text" id="destination" class="form-control" [(ngModel)]="filters.destination" name="destination" placeholder="Nereye">
+        <select id="destination" class="form-select" [(ngModel)]="filters.destination" name="destination">
+          <option value="">Nereye Seçin</option>
+          <option *ngFor="let city of cities" [value]="city">{{city}}</option>
+        </select>
         <label for="destination">Nereye</label>
       </div>
     </div>
@@ -45,7 +51,7 @@
           <strong>Nereye:</strong> {{flight.destination}}
         </div>
       </div>
-      <p class="card-text" style="font-size: 1.000rem;"><strong>Tarih:</strong> {{flight.date}}</p>
+      <p class="card-text" style="font-size: 1.000rem;"><strong>Tarih: </strong>{{ flight.date | date:'yyyy-MM-dd' }}  <strong>Saat: </strong> {{ flight.date | date:'HH:mm' }}</p>
     </div>
     <div class="card-footer text-body-secondary" style="font-size: 0.875rem;">
         <a class="btn btn-primary" style="font-size: 1.000rem;" data-bs-toggle="modal" data-bs-target="#staticBackdrop" (click)="openModal(flight)">Uçuş Seç</a>

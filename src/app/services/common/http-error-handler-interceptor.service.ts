@@ -35,7 +35,10 @@ export class HttpErrorHandlerInterceptorService implements HttpInterceptor {
             }
 
           }).then(data => {
-            
+            this.toastrService.message("Bu İşlemi Yapmaya Yetkiniz Bulunmamaktadır", "Yetkisiz İşlem", {
+              messageType: ToastrMessageType.Error,
+              position: ToastrPosition.TopLeft
+          })
           });
           break
 

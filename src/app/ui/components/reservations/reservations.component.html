@@ -37,7 +37,7 @@
                           <strong>Nereye:</strong> <span>{{flight.destination}}</span>
                       </div>
                       <div style="font-size: 1.000rem;">
-                          <strong>Tarih:</strong> <span>{{flight.date}}</span>
+                        <strong>Tarih: </strong>{{ flight.date | date:'yyyy-MM-dd' }}  <strong>Saat: </strong> {{ flight.date | date:'HH:mm' }}
                       </div>
                   </div>
                   <div style="flex: 1; text-align: center;">

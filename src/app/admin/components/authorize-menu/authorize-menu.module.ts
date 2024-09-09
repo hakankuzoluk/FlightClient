@@ -6,12 +6,16 @@ import {MatTreeModule} from '@angular/material/tree';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { CdkTreeModule } from '@angular/cdk/tree';
+import { MatDialogModule } from '@angular/material/dialog';
+import { AuthorizeMenuDialogComponent } from '../../../dialogs/authorize-menu-dialog/authorize-menu-dialog.component';
+import {MatListModule} from '@angular/material/list';
 
 
 
 @NgModule({
   declarations: [
-    AuthorizeMenuComponent
+    AuthorizeMenuComponent,
+    AuthorizeMenuDialogComponent
   ],
   imports: [
     CommonModule,
@@ -21,7 +25,9 @@ import { CdkTreeModule } from '@angular/cdk/tree';
     MatTreeModule,
     MatButtonModule,
     MatIconModule,
-    CdkTreeModule
+    CdkTreeModule,
+    MatDialogModule,
+    MatListModule
 
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

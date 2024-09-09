@@ -15,12 +15,20 @@ import { HttpClientService } from './services/common/http-client.service';
 })
 export class AppComponent implements OnInit {
   title = 'FlightAppClient';
+  hasRole$ =  this.authService.hasAnyRole(); // Eksik olan `hasRole` özelliğini tanımlıyoruz
+  isAuthenticated: boolean = false; // Kullanıcının oturum açıp açmadığını kontrol eden özellik
 
   constructor(public authService: AuthService, private toastrService : CustomToastrService, private router : Router, private httpClientService : HttpClientService) {
     authService.idendityCheck();
   }
-  ngOnInit(): void {}
 
+
+
+  ngOnInit(): void {
+    // this.authService.hasAnyRole().subscribe(hasRole => {
+    //   this.hasRole = hasRole;
+    // });
+  }
 
 
 

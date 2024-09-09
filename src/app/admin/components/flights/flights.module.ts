@@ -16,6 +16,7 @@ import { DeleteDirective } from '../../../directives/admin/delete.directive';
 import {MatDialogModule} from '@angular/material/dialog';
 import { DeleteDialogComponent } from '../../../dialogs/delete-dialog/delete-dialog.component';
 import { DeleteDirectiveModule } from '../../../directives/admin/delete.directive.module';
+import { MatSelectModule } from '@angular/material/select';
 
 
 
@@ -43,7 +44,8 @@ import { DeleteDirectiveModule } from '../../../directives/admin/delete.directiv
     MatPaginator,
     MatPaginatorModule,
     MatDialogModule,
-    DeleteDirectiveModule
+    DeleteDirectiveModule,
+    MatSelectModule
   ]
 })
 export class FlightsModule { }

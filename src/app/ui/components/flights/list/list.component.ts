@@ -20,16 +20,34 @@ import {
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ReservationsComponent } from '../../reservations/reservations.component';
 import { MatDialog } from '@angular/material/dialog';
+import { DatePipe } from '@angular/common';
+import { List_Flight_V2 } from '../../../../contracts/list_flight_v2';
 declare var bootstrap: any;
 
 @Component({
   selector: 'app-list',
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.scss'],
+  providers: [DatePipe]
 })
 export class ListComponent extends BaseComponent implements OnInit {
   @ViewChild('yourSelectorName') modalRef = {} as ElementRef;
-
+  cities: string[] = [
+    'Adana', 'Adıyaman', 'Afyonkarahisar', 'Ağrı', 'Aksaray', 'Amasya',
+    'Ankara', 'Antalya', 'Artvin', 'Aydın', 'Balıkesir', 'Bartın',
+    'Batman', 'Bayburt', 'Bilecik', 'Bingöl', 'Bitlis', 'Bolu',
+    'Burdur', 'Bursa', 'Çanakkale', 'Çankırı', 'Çorum', 'Denizli',
+    'Diyarbakır', 'Düzce', 'Edirne', 'Elazığ', 'Erzincan', 'Erzurum',
+    'Eskişehir', 'Gaziantep', 'Giresun', 'Gümüşhane', 'Hakkari', 'Hatay',
+    'Iğdır', 'Isparta', 'İstanbul', 'İzmir', 'Kahramanmaraş', 'Karabük',
+    'Karaman', 'Kars', 'Kastamonu', 'Kayseri', 'Kırıkkale', 'Kırklareli',
+    'Kırşehir', 'Kilis', 'Kocaeli', 'Konya', 'Kütahya', 'Malatya',
+    'Manisa', 'Mardin', 'Mersin', 'Muğla', 'Muş', 'Nevşehir', 'Niğde',
+    'Ordu', 'Osmaniye', 'Rize', 'Sakarya', 'Samsun', 'Sanlıurfa',
+    'Siirt', 'Sinop', 'Sivas', 'Şanlıurfa', 'Şırnak', 'Tekirdağ',
+    'Tokat', 'Trabzon', 'Tunceli', 'Uşak', 'Van', 'Yalova', 'Yozgat',
+    'Zonguldak'
+  ];
   constructor(
     private flightService: FlightsService,
     private activatedRoute: ActivatedRoute,
@@ -38,13 +56,15 @@ export class ListComponent extends BaseComponent implements OnInit {
     private toastrService: CustomToastrService,
     private zone: NgZone,
     private modalService: NgbModal,
-    private dialog : MatDialog
+    private dialog : MatDialog,
+    private datePipe: DatePipe
   ) {
     super(spinner);
   }
 
   flights: List_Flight[];
-
+  flightsAll : List_Flight_V2[]
+  formattedDateTime: string;
   currentPageNo: number;
   totalFlightCount: number;
   totalPageCount: number;
@@ -61,7 +81,15 @@ export class ListComponent extends BaseComponent implements OnInit {
   ngOnInit() {
     this.activatedRoute.params.subscribe(async (params) => {
       this.currentPageNo = parseInt(params['pageNo'] ?? 1);
-
+  
+      // Tüm uçuşları alıyoruz ve flightsAll dizisine atıyoruz
+      const allFlightsData = await this.flightService.readAll(
+        () => {},
+        (errorMessage) => {}
+      );
+      this.flightsAll = allFlightsData.flightsAll;
+  
+      // Sayfalı uçuşları almak için read metodunu kullanıyoruz
       const data: { totalFlightCount: number; flights: List_Flight[] } =
         await this.flightService.read(
           this.currentPageNo - 1,
@@ -69,12 +97,12 @@ export class ListComponent extends BaseComponent implements OnInit {
           () => {},
           (errorMessage) => {}
         );
-
+  
       this.flights = data.flights;
       this.totalFlightCount = data.totalFlightCount;
       this.totalPageCount = Math.ceil(this.totalFlightCount / this.pageSize);
       this.pageList = [];
-
+  
       if (this.currentPageNo - 3 <= 0) {
         for (let i = 1; i <= 7; i++) this.pageList.push(i);
       } else if (this.currentPageNo + 3 >= this.totalPageCount) {
@@ -84,14 +112,16 @@ export class ListComponent extends BaseComponent implements OnInit {
         for (let i = this.currentPageNo - 3; i <= this.currentPageNo + 3; i++)
           this.pageList.push(i);
       }
-
+  
       this.filterFlights(); // Uçuşlar yüklendikten sonra filtreleme işlemi yapılıyor.
     });
   }
 
   filterFlights() {
     this.showSpinner(SpinnerType.SquareJellyBox);
-    this.filteredFlights = this.flights.filter((flight) => {
+  
+    // flightsAll üzerinde filtreleme yapıyoruz
+    const filtered = this.flightsAll.filter((flight) => {
       const departureMatch =
         !this.filters.departure ||
         flight.departure
@@ -102,13 +132,19 @@ export class ListComponent extends BaseComponent implements OnInit {
         flight.destination
           .toLowerCase()
           .includes(this.filters.destination.toLowerCase());
-
+  
       const dateMatch =
         !this.filters.date ||
         new Date(flight.date).toLocaleDateString() ===
           new Date(this.filters.date).toLocaleDateString();
       return departureMatch && destinationMatch && dateMatch;
     });
+  
+    // Sayfalama işlemi için slice kullanarak sadece istenilen sayfayı alıyoruz
+    const startIndex = (this.currentPageNo - 1) * this.pageSize;
+    const endIndex = this.currentPageNo * this.pageSize;
+    this.filteredFlights = filtered.slice(startIndex, endIndex);
+  
     this.hideSpinner(SpinnerType.SquareJellyBox);
   }
 
@@ -149,17 +185,5 @@ export class ListComponent extends BaseComponent implements OnInit {
         bsCollapse.toggle();
       }
     });
-  }
-
-  formatDate(date: Date): string {
-    const d = new Date(date);
-    let month = '' + (d.getMonth() + 1);
-    let day = '' + d.getDate();
-    const year = d.getFullYear();
-
-    if (month.length < 2) month = '0' + month;
-    if (day.length < 2) day = '0' + day;
-
-    return [year, month, day].join('-');
   }
 }

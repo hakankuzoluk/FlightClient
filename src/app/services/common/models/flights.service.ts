@@ -5,6 +5,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { List_Flight } from '../../../contracts/list_flight';
 import { firstValueFrom, Observable } from 'rxjs';
 import { List_Flight_V2 } from '../../../contracts/list_flight_v2';
+import { List_Flight_User } from '../../../contracts/list_flight_user';
 
 @Injectable({
   providedIn: 'root'
@@ -62,15 +63,29 @@ export class FlightsService {
     });
   }
 
-  async readAll(successCallBack?: () => void, errorCallBack?: (errorMessage: string) => void): Promise<{ flightsV2: List_Flight_V2[] }> {
-    const promiseData: Promise<{ flightsV2: List_Flight_V2[] }> = this.httpClientService.get<{ flightsV2: List_Flight_V2[] }>({
-      controller: "flights",
-      action: "All"
-    }).toPromise();
+  async read2(page : number = 0, size : number =5,successCallBack?: () => void, errorCallBack?: (errorMessage : string) => void) : Promise<{totalFlightCountUser : number, flightsUser :List_Flight_User[]}> { //Tekrar incele anlamadım.
+    const promiseData : Promise<{totalFlightCountUser : number, flightsUser :List_Flight_User[]}> = this.httpClientService.get<{totalFlightCountUser : number, flightsUser :List_Flight_User[]}>({
+     controller:"flights",
+     action:"User",
+     queryString:`page=${page}&size=${size}`
+   }).toPromise();
+
+   promiseData.then(d => successCallBack())
+     .catch((errorResponse : HttpErrorResponse) => errorCallBack(errorResponse.message))
+   return await promiseData;
+
+ }
+ async readAll(successCallBack?: () => void, errorCallBack?: (errorMessage : string) => void) : Promise<{flightsAll :List_Flight_V2[]}> { //Tekrar incele anlamadım.
+  const promiseData : Promise<{flightsAll :List_Flight_V2[]}> = this.httpClientService.get<{flightsAll :List_Flight_V2[]}>({
+   controller:"flights",
+   action:"All"
+ }).toPromise();
+
+ promiseData.then(d => successCallBack())
+   .catch((errorResponse : HttpErrorResponse) => errorCallBack(errorResponse.message))
+ return await promiseData;
+
+}
+
   
-    promiseData.then(d => successCallBack?.())
-      .catch((errorResponse: HttpErrorResponse) => errorCallBack?.(errorResponse.message));
-  
-    return await promiseData;
-  }
 }

@@ -43,8 +43,8 @@ export class LoginComponent extends BaseComponent implements OnInit {
           const returnUrl : string = params["returnUrl"];
           if(returnUrl)
             this.router.navigate([returnUrl])
-          //else
-            //this.router.navigate([""])
+          else
+            this.router.navigate([""])
         })
         this.hideSpinner(SpinnerType.SquareLoader)
       })
